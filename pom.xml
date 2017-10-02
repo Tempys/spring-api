@@ -8,6 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<modules>
 		<module>simple-webflux</module>
+		<module>client-event-handler</module>
 	</modules>
 	<packaging>pom</packaging>
 

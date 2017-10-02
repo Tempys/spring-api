@@ -11,9 +11,19 @@ public class SimpleApplication {
 
     public static void main(String[] args) {
       ApplicationContext context = SpringApplication.run(SimpleApplication.class, args);
-        UuidCalculateService uuidCalculateService = context.getBean(UuidCalculateService.class);
-        uuidCalculateService.calculates();
 
+
+       /* UuidCalculateService uuidCalculateService = context.getBean(UuidCalculateService.class);
+
+        for(int i=0;i<=3;i++){
+            System.out.println("UUID: " + uuidCalculateService.calculates());
+        }*/
+
+       UuidCalculateService uuidCalculateService = context.getBean(UuidCalculateService.class);
+
+        for(int i=0;i<=3;i++){
+            System.out.println("Balance: " + uuidCalculateService.getBalance());
+        }
 
     }
 }
