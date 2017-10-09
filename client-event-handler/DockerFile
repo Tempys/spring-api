@@ -1,7 +1,12 @@
 FROM cpa2dev.kyivstar.ua/alpine-oracle-jdk8-bash
+#FROM anapsix/alpine-java
 
-COPY ./target/client-event-handler.jar /client-event-handler
-WORKDIR /cpa-provider-io
+
+RUN mkdir client-event-handler
+ADD  ./target/client-event-handler.jar /client-event-handler/client-event-handler.jar
+
+#COPY ./target/client-event-handler.jar /client-event-handler
+WORKDIR /client-event-handler
 
 RUN ["chown", "-R", "daemon:daemon", "."]
 RUN ["mkdir", "-p", "logs"]
@@ -11,6 +16,5 @@ EXPOSE 8079 8080
 
 USER daemon
 
-ENV JAVA_OPTS "-Xmx300m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8078"
-CMD ["bin/client-event-handler", "8081"]
-
+ENV JAVA_OPTS "-Xmx500m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8078"
+CMD ["bin/client-event-handler", "8080"]
