@@ -1,0 +1,7 @@
+cpa-provider-io:
+  image: cpa2dev.kyivstar.ua/cpa-provider-io:latest
+  ports:
+    - 8079:8079
+    - 8080:8080
+  volumes:
+    - ./logs:/cpa-provider-io/logs/

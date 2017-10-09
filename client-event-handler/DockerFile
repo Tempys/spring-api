@@ -1,0 +1,16 @@
+FROM cpa2dev.kyivstar.ua/alpine-oracle-jdk8-bash
+
+COPY ./build/install/cpa-provider-io /cpa-provider-io
+WORKDIR /cpa-provider-io
+
+RUN ["chown", "-R", "daemon:daemon", "."]
+RUN ["mkdir", "-p", "logs"]
+RUN ["chown", "-R", "daemon:daemon", "logs"]
+
+EXPOSE 8079 8080
+
+USER daemon
+
+ENV JAVA_OPTS "-Xmx300m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8079"
+CMD ["bin/cpa-provider-io", "8080"]
+
