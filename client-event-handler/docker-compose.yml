@@ -1,7 +1,7 @@
-cpa-provider-io:
-  image: cpa2dev.kyivstar.ua/cpa-provider-io:latest
+client-event-handler:
+  image: cpa2dev.kyivstar.ua/client-event-handler:latest
   ports:
     - 8079:8079
     - 8080:8080
   volumes:
-    - ./logs:/cpa-provider-io/logs/
+    - ./logs:/client-event-handler/logs/

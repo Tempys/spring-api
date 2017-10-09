@@ -1,6 +1,6 @@
 FROM cpa2dev.kyivstar.ua/alpine-oracle-jdk8-bash
 
-COPY ./build/install/cpa-provider-io /cpa-provider-io
+COPY ./target/client-event-handler.jar /client-event-handler
 WORKDIR /cpa-provider-io
 
 RUN ["chown", "-R", "daemon:daemon", "."]
@@ -11,6 +11,6 @@ EXPOSE 8079 8080
 
 USER daemon
 
-ENV JAVA_OPTS "-Xmx300m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8079"
-CMD ["bin/cpa-provider-io", "8080"]
+ENV JAVA_OPTS "-Xmx300m -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8078"
+CMD ["bin/client-event-handler", "8081"]
 
