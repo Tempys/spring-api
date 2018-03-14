@@ -24,18 +24,28 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 public class RoutesConfig {
 
     @Bean
-    public RouterFunction routes(){
+    public MapperFactory createMapperFactory(){
+        return new DefaultMapperFactory.Builder().build();
+    }
+
+    @Bean
+    public RouterFunction routes(MapperFactory factory){
         HandlerFunction hello = request -> ServerResponse.ok().body(fromObject(UUID.randomUUID().toString()));
 
         Function<Personne,Person> transform = item -> {
-            MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-            mapperFactory.classMap(Personne.class, Person.class)
-                    .field("nom", "name")
-                    .field("surnom", "nickname")
-                    .field("age", "age").register();
-            MapperFacade mapper = mapperFactory.getMapperFacade();
+
+
+
+            factory.classMap(Personne.class, Person.class)
+                         .field("nom", "name")
+                         .field("surnom", "nickname")
+                         .byDefault()
+                         .register();
+
+            MapperFacade mapper = factory.getMapperFacade();
            // Personne frenchPerson = new Personne("Claire", "cla", 25);
             return  mapper.map(item, Person.class);
+
         };
 
 
