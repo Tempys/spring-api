@@ -2,8 +2,10 @@ package com.dubovskyi.client.event;
 
 import com.dubovskyi.client.event.dto.Person;
 import com.dubovskyi.client.event.dto.Personne;
+import com.dubovskyi.client.event.dto.UserConvecter;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.converter.ConverterFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +27,13 @@ public class RoutesConfig {
 
     @Bean
     public MapperFactory createMapperFactory(){
-        return new DefaultMapperFactory.Builder().build();
+        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
+
+        ConverterFactory converterFactory = mapperFactory.getConverterFactory();
+        converterFactory.registerConverter("userConvector",new UserConvecter());
+
+
+        return mapperFactory;
     }
 
     @Bean
@@ -34,11 +42,10 @@ public class RoutesConfig {
 
         Function<Personne,Person> transform = item -> {
 
-
-
             factory.classMap(Personne.class, Person.class)
                          .field("nom", "name")
                          .field("surnom", "nickname")
+                         .fieldMap("user","isAdmin").converter("userConvector").mapNulls(true).mapNullsInReverse(true).add()
                          .byDefault()
                          .register();
 
