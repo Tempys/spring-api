@@ -5,4 +5,7 @@ import lombok.Data;
 @Data
 public class Details {
 
+    private String street;
+    private String city;
+
 }

@@ -14,7 +14,8 @@ public class Personne {
     private String nom;
     private String surnom;
     private int age;
-    private Map<String, String> details;
+    private Map<String, String> subs;
     private List<String> heading;
     private User user;
+    private DetailsDto details;
 }

@@ -13,9 +13,10 @@ public class Person {
     private String name;
     private String nickname;
     private int age;
-    private Map<String, String> details;
+    private Map<String, String> subs;
     List<String> heading;
     private Boolean isAdmin;
     private boolean isAnonim;
+    private Details details;
     
 }
