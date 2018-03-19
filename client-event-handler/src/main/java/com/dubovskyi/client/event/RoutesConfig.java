@@ -40,7 +40,7 @@ public class RoutesConfig {
 
         Function<Personne,Person> transform = item -> {
 
-            factory.classMap(Personne.class, Person.class)
+                factory.classMap(Personne.class, Person.class)
                          .field("nom", "name")
                          .field("surnom", "nickname")
                           .field("details","details")
